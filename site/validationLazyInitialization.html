@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="dist/vue-validator.css"/>
+    <script src="dist/jquery.js"></script>
+    <script src="dist/vue.js"></script>
+    <script type="text/javascript" src="dist/vue-validator.js"></script>
+</head>
+<body>
+    <form id="form">
+        name: <input type="text" v-model="name" wait-for="name-loaded" v-validate="required, minLength:5"><br /><br />
+        email: <input type="text" v-model="email" wait-for="email-loaded" v-validate="required, email"><br /><br />
+        <input type="submit" value="send" v-if="valid && dirty">
+    </form>
+
+    <script>
+        var validator = window["vue-validator"]
+
+        Vue.use(validator)
+
+        new Vue({
+            el:"#form",
+            data: {
+                name: "",
+                email: "",
+                res:{
+                    name:"testtest",
+                    email:""
+                }
+            },
+            validator: {
+                validates: {
+                    email: function (val) {
+                        return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val)
+                    }
+                },
+                message:{
+                    email:"请填写正确的邮箱"
+                }
+            },
+            ready: function () {
+                var self = this
+
+                // ...
+
+                // load user profile data with ajax (example: vue-resource)
+                $.get("data/data.txt", function(data){
+                    //console.log(data)
+                    // ...
+
+                    // emit the event that was specified 'wait-for' attribute
+                    self.$emit('name-loaded', self.res.name)
+                    self.$emit('email-loaded', self.res.email)
+
+                    // ...
+                });
+
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,12 +1,14 @@
 #扩展vue-validator
 
-这个插件是配合vue，使用指令 `v-validate` 对model进行验证，验证方法可以自己写也可以使用默认的几个方法。扩展插件，可以直接添加和显示提示消息，不用通过手写，截止显示错误信息根据配置或者默认设置。
+这个插件是配合vue，使用指令 `v-validate` 对model进行验证，验证方法可以自己写也可以使用默认的几个方法。
+
+【扩展插件】可以直接添加和显示提示消息，不用通过手写，直接显示错误信息根据配置或者默认设置。
 
 ##指令
 
 ###v-validate
 
-【例如】 [demo](VUEValidatorDemo/validationSimple.html)
+【例如】 [demo](validationSimple.html)
 
 - 这个指令通常是跟 `v-model` 一起使用
 - 这个指令接受视图模型的属性。
@@ -76,7 +78,7 @@
 
 ###懒初始化
 
-【例如】 [demo](VUEValidatorDemo/validationLazyInitialization.html)
+【例如】 [demo](validationLazyInitialization.html)
 
 当调用 `wait-for` 这个属性时，可以等待异步数据加载完在进行验证。在 `created` `compiled` `ready` 里使用 `$emit` 可以指定事件名处理赋值
 
